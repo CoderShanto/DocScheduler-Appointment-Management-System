@@ -18,19 +18,16 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      console.log("backendUrl:", backendUrl);
-
       if (state === "Admin") {
         const { data } = await axios.post(backendUrl + "/api/admin/login", {
           email,
           password,
         });
 
-        console.log("admin login response:", data);
-
         if (data.success) {
           localStorage.setItem("aToken", data.token);
           setAToken(data.token);
+          toast.success("Admin login successful");
           navigate("/admin-dashboard");
         } else {
           toast.error(data.message);
@@ -41,11 +38,10 @@ const Login = () => {
           password,
         });
 
-        console.log("doctor login response:", data);
-
         if (data.success) {
           localStorage.setItem("dToken", data.token);
           setDToken(data.token);
+          toast.success("Doctor login successful");
           navigate("/doctor-dashboard");
         } else {
           toast.error(data.message);
