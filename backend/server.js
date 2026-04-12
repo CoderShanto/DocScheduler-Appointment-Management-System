@@ -41,7 +41,7 @@ app.use('/api/user', userRouter)
 app.use('/api/payment', paymentRoutes)
 
 app.get('/', (req, res) => {
-    res.send('API WORKING SIR')
+    res.send('API WORKING SIR v2')
 })
 
 app.listen(port, () => console.log("Server Started", port))
