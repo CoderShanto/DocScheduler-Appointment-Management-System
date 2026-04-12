@@ -20,7 +20,17 @@ connectCloudinary()
 // ✅ MIDDLEWARES MUST COME BEFORE ROUTES
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors())
+// app.use(cors())
+
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'https://docscheduler-appointment-management-68ha.onrender.com'
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'aToken', 'dToken'],
+  credentials: true
+}))
 
 // ✅ NOW register your API endpoints
 app.use('/api/admin', adminRouter)
