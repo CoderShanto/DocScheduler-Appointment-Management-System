@@ -31,6 +31,8 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization', 'aToken', 'dToken'],
   credentials: true
 }))
+// 🔥 THIS LINE IS MISSING (VERY IMPORTANT)
+app.options('*', cors());
 
 // ✅ NOW register your API endpoints
 app.use('/api/admin', adminRouter)
