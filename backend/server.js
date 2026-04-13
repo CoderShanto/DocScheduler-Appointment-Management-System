@@ -7,41 +7,52 @@ import adminRouter from './routes/adminRoute.js'
 import doctorRouter from './routes/doctorRoute.js'
 import userRouter from './routes/userRoute.js'
 import paymentRoutes from './routes/paymentRoutes.js'
-import dotenv from "dotenv";
-
-dotenv.config();
 
 // app config
 const app = express()
 const port = process.env.PORT || 4000
+
+// DB + cloud
 connectDB()
 connectCloudinary()
 
-// ✅ MIDDLEWARES MUST COME BEFORE ROUTES
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-// app.use(cors())
+// ======================
+// MIDDLEWARES
+// ======================
 
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+// ✅ SIMPLE + SAFE CORS (FINAL)
 app.use(cors({
   origin: [
     'http://localhost:5173',
     'https://docscheduler-appointment-management-68ha.onrender.com'
   ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'aToken', 'dToken'],
   credentials: true
 }))
-// 🔥 THIS LINE IS MISSING (VERY IMPORTANT)
-app.options('*', cors());
 
-// ✅ NOW register your API endpoints
+// ✅ Handle preflight
+app.options('*', cors())
+
+// ======================
+// ROUTES
+// ======================
+
 app.use('/api/admin', adminRouter)
 app.use('/api/doctor', doctorRouter)
 app.use('/api/user', userRouter)
 app.use('/api/payment', paymentRoutes)
 
+// test route
 app.get('/', (req, res) => {
-    res.send('API WORKING SIR v2')
+  res.send('API WORKING SIR FINAL')
 })
 
-app.listen(port, () => console.log("Server Started", port))
+// ======================
+// START SERVER
+// ======================
+
+app.listen(port, () => {
+  console.log("Server Started on port", port)
+})
