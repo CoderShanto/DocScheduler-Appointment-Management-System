@@ -179,7 +179,7 @@ This project is licensed under the MIT License.
 
 ## 👨‍💻 Author
 
-Mahmud Hasan Shanto
+Mahmud Hasan Shanto.
 Aspiring Software Engineer (Full Stack Developer)
 
 ---
